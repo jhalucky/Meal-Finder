@@ -36,7 +36,7 @@ export default function SearchBar({ onSearch }) {
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 mb-4">
         {/* Header with title and mobile toggle */}
         <div className="flex justify-between items-center w-full sm:w-auto">
-          <h1 className="text-3xl sm:text-5xl font-bold text-red-500 tracking-wider meal-finder">MEAL FINDER</h1>
+          <h1 className="text-3xl sm:text-5xl font-bold text-red-600 tracking-wider meal-finder">MEAL FINDER</h1>
           {/* Toggle button - visible only on mobile */}
           <div className="sm:hidden">
             <ModeToggle />

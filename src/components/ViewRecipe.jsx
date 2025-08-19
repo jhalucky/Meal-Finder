@@ -81,7 +81,6 @@ export default function ViewRecipe() {
     return (
         <div className="min-h-screen p-2">
             <div className="max-w mx-auto">
-                {/* Go Back Button */}
                 <Link to="/" className="inline-flex items-center space-x-2 text-red-600  hover:text-red-400 transition-colors duration-300 mb-5 text-lg font-medium">
                     <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -89,7 +88,6 @@ export default function ViewRecipe() {
                     <span>Go back</span>
                 </Link>
 
-                {/* Recipe Card - Image and Name Only */}
                 <div className="bg-white rounded-3xl justify-center items-center overflow-hidden shadow-2xl border border-gray-800 mb-8 max-w-md mx-auto p-5">
                     <img
                         src={meal.strMealThumb}
@@ -102,18 +100,20 @@ export default function ViewRecipe() {
                         </h2>
                     </div>
                     <div className="justify-center items-center text-center mt-4">
-                        <a href={meal.strYoutube} target="_blank" rel="noopener noreferrer" className="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-500">
-                            Watch Video
-                        </a>
+                        <button className="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-500 transition-colors duration-300">
+                            <a href={meal.strYoutube} target="_blank" rel="noopener noreferrer">
+                                Watch Video
+                            </a>
+                        </button>
                     </div>
                 </div>
 
-                {/* Instructions Section */}
+    
                 <div className="mb-8">
                     <h3 className="text-2xl font-bold text-red-500 mb-6 border-b border-gray-700 pb-2">
                         Instructions
                     </h3>
-                    <ul className="text-gray-300 leading-relaxed text-lg space-y-4">
+                    <ul className="text-black dark:text-white leading-relaxed text-lg space-y-4">
                         {formatInstructions(meal.strInstructions).map((step, index) => (
                             <li key={index} className="flex items-start">
                                 <span className="text-red-500 mr-4 mt-1 text-xl">•</span>
@@ -123,16 +123,16 @@ export default function ViewRecipe() {
                     </ul>
                 </div>
 
-                {/* Ingredients Section */}
+        
                 <div>
                     <h3 className="text-2xl font-bold text-red-500 mb-6 border-b border-gray-700 pb-2">
                         Ingredients
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         {ingredients.map(({ ingredient, measure }, index) => (
-                            <div key={index} className="rounded-lg px-4 py-3 flex justify-between items-center border border-gray-700 hover:bg-gray-750 transition-colors">
-                                <span className="text-white font-medium">{ingredient}</span>
-                                <span className="text-gray-400">{measure}</span>
+                            <div key={index} className="rounded-lg px-4 py-3 flex justify-between items-center border border-gray-700">
+                                <span className="text-black dark:text-white font-medium">{ingredient}</span>
+                                <span className="text-black dark:text-white">{measure}</span>
                             </div>
                         ))}
                     </div>

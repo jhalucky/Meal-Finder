@@ -3,6 +3,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+.meal-finder {
+  font-family: kranky, sans-serif;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

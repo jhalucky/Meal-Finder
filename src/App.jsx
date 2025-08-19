@@ -27,7 +27,7 @@ function App() {
 
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-      <div className="bg-background text-foreground min-h-screen mx-auto">
+      <div className=" bg-background text-foreground min-h-screen mx-auto">
         <Router>
           <div className="p-4 flex flex-col justify-center">
             <Routes>

@@ -3,29 +3,25 @@ import fetch from "node-fetch";
 import cors from "cors";
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
+// ✅ Enable CORS for all requests
 app.use(cors());
+
+// If you want to allow only your frontend (safer), do this:
+// app.use(cors({ origin: "http://localhost:5173" }));
+
+// Middleware
 app.use(express.json());
 
-const BASE_URL = "https://www.themealdb.com/api/json/v1/1";
-
-// Search meal by name
-app.get("/api/search", async (req, res) => {
-  const query = req.query.q;
-  try {
-    const response = await fetch(`${BASE_URL}/search.php?s=${query}`);
-    const data = await response.json();
-    res.json(data.meals);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch meals" });
-  }
+// Routes
+app.get("/", (req, res) => {
+  res.send("🍔 Meal API Backend is running!");
 });
 
-// Get random meals
-app.get("/api/random", async (req, res) => {
+app.get("/random", async (req, res) => {
   try {
-    const response = await fetch(`${BASE_URL}/random.php`);
+    const response = await fetch("https://www.themealdb.com/api/json/v1/1/random.php");
     const data = await response.json();
     res.json(data.meals[0]);
   } catch (error) {
@@ -33,26 +29,39 @@ app.get("/api/random", async (req, res) => {
   }
 });
 
-// Get meal by ID
-app.get("/api/meal/:id", async (req, res) => {
+app.get("/search", async (req, res) => {
   try {
-    const response = await fetch(`${BASE_URL}/lookup.php?i=${req.params.id}`);
+    const query = req.query.q;
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
     const data = await response.json();
-    res.json(data.meals ? data.meals[0] : null);
+    res.json(data);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch meal by ID" });
+    res.status(500).json({ error: "Failed to search meals" });
   }
 });
 
-// Get categories
-app.get("/api/categories", async (req, res) => {
+app.get("/meal/:id", async (req, res) => {
   try {
-    const response = await fetch(`${BASE_URL}/categories.php`);
+    const id = req.params.id;
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
     const data = await response.json();
-    res.json(data.categories || []);
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch meal details" });
+  }
+});
+
+app.get("/categories", async (req, res) => {
+  try {
+    const response = await fetch("https://www.themealdb.com/api/json/v1/1/categories.php");
+    const data = await response.json();
+    res.json(data);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch categories" });
   }
 });
 
-app.listen(PORT, () => console.log(`✅ Server running on http://localhost:${PORT}`));
+// Start server
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+});

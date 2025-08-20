@@ -36,7 +36,7 @@ export default function SearchBar({ onSearch }) {
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 mb-4">
         {/* Header with title and mobile toggle */}
         <div className="flex justify-between items-center w-full sm:w-auto">
-          <h1 className="text-3xl sm:text-5xl font-bold text-red-600 tracking-wider meal-finder">MEAL FINDER</h1>
+          <h1 className="text-3xl sm:text-5xl font-bold text-amber-600 tracking-wider meal-finder">MEAL FINDER</h1>
           {/* Toggle button - visible only on mobile */}
           <div className="sm:hidden">
             <ModeToggle />
@@ -57,11 +57,10 @@ export default function SearchBar({ onSearch }) {
               type="submit" 
               onClick={handleSubmit} 
               disabled={loading} 
-              className="flex-1 sm:flex-initial bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="flex-1 sm:flex-initial bg-amber-600 hover:bg-red-200 text-white px-6 py-3 rounded-lg font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               {loading ? "Searching..." : "Search"}
             </button>
-            {/* Toggle button - visible only on desktop */}
             <div className="hidden sm:block">
               <ModeToggle />
             </div>

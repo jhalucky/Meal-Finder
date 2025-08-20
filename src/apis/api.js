@@ -1,32 +1,28 @@
 
-const BASE_URL = "https://www.themealdb.com/api/json/v1/1";
+const BASE_URL = "http://localhost:5000/api";
+
 
 export async function fetchRecipe(query) {
-    const res = await fetch(`${BASE_URL}/search.php?s=${query}`)
-    const data = await res.json();
-    return data.meals;
+    const res = await fetch(`${BASE_URL}/search?q=${query}`);
+    return res.json();
 }
 
-export const getRandomMeals = async (count = 6) => {
-  const promises = [];
-  for (let i = 0; i < count; i++) {
-    promises.push(
-      fetch('https://www.themealdb.com/api/json/v1/1/random.php')
-        .then(response => response.json())
-        .then(data => data.meals[0])
-    );
-  }
-  return Promise.all(promises);
-};
+export async function getRandomMeals(count = 6) {
+    const promises = [];
+    for (let i = 0; i < count; i++) {
+        promises.push(
+            fetch(`${BASE_URL}/random`).then(res => res.json())
+        );
+    }
+    return Promise.all(promises);
+}
 
 export async function getMealById(id) {
-    const res = await fetch(`${BASE_URL}/lookup.php?i=${id}`);
-    const data = await res.json();
-    return data.meals? data.meals[0]: null;
+    const res = await fetch(`${BASE_URL}/meal/${id}`);
+    return res.json();
 }
 
 export async function getCategories() {
-    const res = await fetch(`${BASE_URL}/categories.php`);
-    const data = await res.json();
-    return data.categories || [];
+    const res = await fetch(`${BASE_URL}/categories`);
+    return res.json();
 }

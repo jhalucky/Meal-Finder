@@ -60,28 +60,28 @@ export default function ViewRecipe() {
     };
 
     if (loading) return (
-        <div className="min-h-screen bg-black flex items-center justify-center">
-            <div className="text-white text-xl">Loading...</div>
+        <div className="min-h-screen bg-white dark:bg-white flex items-center justify-center">
+            <div className="text-black dark:text-white text-xl">Loading...</div>
         </div>
     );
     
     if (error) return (
-        <div className="min-h-screen bg-black flex flex-col items-center justify-center space-y-4">
-            <Link to="/" className="text-red-500 hover:text-red-400 transition-colors">Go back</Link>
+        <div className="min-h-screen bg-white dark:bg-blacks flex flex-col items-center justify-center space-y-4">
+            <Link to="/" className="text-amber-600 hover:text-amber-200 transition-colors">Go back</Link>
             <p className="text-red-400">Error fetching recipe: {error}</p>
         </div>
     );
     
     if (!meal) return (
-        <div className="min-h-screen bg-black flex items-center justify-center">
-            <p className="text-white text-xl">Recipe not found</p>
+        <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center">
+            <p className="text-black dark:text-white text-xl">Recipe not found</p>
         </div>
     );
 
     return (
         <div className="min-h-screen p-2">
             <div className="max-w mx-auto">
-                <Link to="/" className="inline-flex items-center space-x-2 text-red-600  hover:text-red-400 transition-colors duration-300 mb-5 text-lg font-medium">
+                <Link to="/" className="inline-flex items-center space-x-2 text-amber-600  hover:text-amber-200 transition-colors duration-300 mb-5 text-lg font-medium">
                     <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                     </svg>
@@ -100,7 +100,7 @@ export default function ViewRecipe() {
                         </h2>
                     </div>
                     <div className="justify-center items-center text-center mt-4">
-                        <button className="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-500 transition-colors duration-300">
+                        <button className="bg-amber-600 text-white py-2 px-4 rounded hover:bg-amber-200 transition-colors duration-300">
                             <a href={meal.strYoutube} target="_blank" rel="noopener noreferrer">
                                 Watch Video
                             </a>
@@ -110,13 +110,13 @@ export default function ViewRecipe() {
 
     
                 <div className="mb-8">
-                    <h3 className="text-2xl font-bold text-red-500 mb-6 border-b border-gray-700 pb-2">
+                    <h3 className="text-2xl font-bold text-amber-600 mb-6 border-b border-gray-700 pb-2">
                         Instructions
                     </h3>
                     <ul className="text-black dark:text-white leading-relaxed text-lg space-y-4">
                         {formatInstructions(meal.strInstructions).map((step, index) => (
                             <li key={index} className="flex items-start">
-                                <span className="text-red-500 mr-4 mt-1 text-xl">•</span>
+                                <span className="text-amber-600 mr-4 mt-1 text-xl">•</span>
                                 <span>{step}</span>
                             </li>
                         ))}
@@ -125,7 +125,7 @@ export default function ViewRecipe() {
 
         
                 <div>
-                    <h3 className="text-2xl font-bold text-red-500 mb-6 border-b border-gray-700 pb-2">
+                    <h3 className="text-2xl font-bold text-amber-600 mb-6 border-b border-gray-700 pb-2">
                         Ingredients
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">

@@ -14,8 +14,9 @@ export default function SearchBar({ onSearch }) {
     setError(null);
     try {
       const data = await fetchRecipe(query);
-      onSearch(data || []);
-      if (data && data.length === 0) {
+      const meals = data?.meals || [];
+      onSearch(meals);
+      if (meals.length === 0) {
         setError("No recipes found. Try a different search term.");
       }
     } catch (err) {
@@ -34,7 +35,7 @@ export default function SearchBar({ onSearch }) {
   return (
     <div className="border-gray-800 py-6 px-6">
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 mb-4">
-        {/* Header with title and mobile toggle */}
+        {/* Header with title and mobile toggle */} 
         <div className="flex justify-between items-center w-full sm:w-auto">
           <h1 className="text-3xl sm:text-5xl font-bold text-amber-600 tracking-wider meal-finder">MEAL FINDER</h1>
           {/* Toggle button - visible only on mobile */}

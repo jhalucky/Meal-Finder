@@ -11,15 +11,16 @@ export default function ViewRecipe() {
     useEffect(() => {
         let cancelled = false;
         async function load() {
-            setError("");
+            setError("");   
             setLoading(true);
             try {
                 const data = await getMealById(id);
                 if (!cancelled) {
-                    setMeal(data);
-                }
-                if (!data && !cancelled) {
+                     if (data && data.meals && data.meals.length > 0) {
+                    setMeal(data.meals[0]); // ✅ pick first meal
+                    } else {
                     setError("Meal not found");
+                    }
                 }
             } catch (error) {
                 if (!cancelled) {
@@ -60,13 +61,13 @@ export default function ViewRecipe() {
     };
 
     if (loading) return (
-        <div className="min-h-screen bg-white dark:bg-white flex items-center justify-center">
+        <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center">
             <div className="text-black dark:text-white text-xl">Loading...</div>
         </div>
     );
     
     if (error) return (
-        <div className="min-h-screen bg-white dark:bg-blacks flex flex-col items-center justify-center space-y-4">
+        <div className="min-h-screen bg-white dark:bg-black flex flex-col items-center justify-center space-y-4">
             <Link to="/" className="text-amber-600 hover:text-amber-200 transition-colors">Go back</Link>
             <p className="text-red-400">Error fetching recipe: {error}</p>
         </div>
